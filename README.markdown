@@ -4,21 +4,6 @@ This Odoo module provides a comprehensive membership management system for **KOD
 
 ---
 
-## 📑 Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Installation (Docker)](#installation-docker)
-- [Module Features](#module-features)
-- [Module Structure](#module-structure)
-- [Security & Permissions](#security--permissions)
-- [Business Logic Highlights](#business-logic-highlights)
-- [Excel Report](#excel-report)
-- [PDF Report](#pdf-report)
-- [Future Enhancements](#future-enhancements)
-- [Dependencies](#dependencies)
-- [Author](#author)
----
-
 ## 🛠️ Prerequisites
 
 Before installing the module, ensure the following requirements are met:
@@ -27,6 +12,7 @@ Before installing the module, ensure the following requirements are met:
 - **Docker**: Latest version installed
 - **Python**: 3.8+ (for Odoo compatibility)
 - **Dependencies**: Odoo modules `base`, `mail`, and `sale`
+
 ---
 
 ## 🚀 Installation (Docker)
@@ -34,20 +20,24 @@ Before installing the module, ensure the following requirements are met:
 Follow these steps to set up the module using Docker:
 
 1. **Clone the Repository**:
+
    ```bash
    git clone <your-repo-url>
    cd odoo-docker-project
    ```
 
 2. **Ensure Module Placement**:
+
    - Place the `kode_membership` module in the `custom_addons/` directory.
 
 3. **Build and Run Containers**:
+
    ```bash
    docker compose up -d --build
    ```
 
 4. **Access Odoo**:
+
    - Open your browser and navigate to: `http://localhost:8069`
    - Log in with:
      - **Username**: `admin`
@@ -63,31 +53,37 @@ Follow these steps to set up the module using Docker:
 ## 🌟 Module Features
 
 ### ✅ Member Management
+
 - Create and manage member profiles with bilingual (English/Arabic) names, images, and branch assignments.
 - Track membership statuses: `Draft`, `Approved`, or `Black List`.
 - Integrate with `res.partner` for seamless CRM compatibility.
 - Automatically compute renewal details, including last order, date, and total amount.
 
 ### 🏢 Branch Management
+
 - Define and manage club branches with unique names and locations.
 - Assign members to multiple branches (many-to-many relationship).
 - Monitor member counts per branch for operational insights.
 
 ### ⛔ Blacklist Workflow
+
 - Blacklist members with detailed reasons using a dedicated wizard.
 - Maintain a comprehensive blacklist history in `kode.blacklist.history`.
 
 ### ♻️ Revision Request Workflow
+
 - Submit revision requests for blacklist status changes via a wizard.
 - Prevent duplicate pending requests for the same blacklist entry.
 - Managers can `Accept` or `Deny` requests, with `Accepted` requests resetting member status to `Draft`.
 
 ### 🛡️ Access Control
+
 - **Manager Group**: Full access to all members, blacklist, and revision workflows.
 - **User Group**: Restricted to viewing `Approved` or `Black List` members only.
 - Managers exclusively control revision status updates.
 
 ### 📊 Reporting
+
 - **Excel Report**: Export member details (names, status, renewal data, and total last order price) in a formatted Excel file.
 - **QWeb Report**: Generate printable HTML/PDF reports with member details and assigned branches, styled with Bootstrap.
 
@@ -97,8 +93,10 @@ Follow these steps to set up the module using Docker:
 
 ```plaintext
 kode_membership/
+├── __init__.py          # Module initialization
 ├── __manifest__.py        # Module metadata
-├── models/                # Business logic
+├── models/              # Business logic and data models
+│   ├── __init__.py
 │   ├── kode_member.py
 │   ├── kode_branch.py
 │   ├── blacklist_history.py
@@ -132,27 +130,31 @@ kode_membership/
 ## 🔐 Security & Permissions
 
 ### Groups (`groups.xml`)
+
 - **Manager**: `group_membership_manager` (full access)
 - **User**: `group_membership_user` (limited access)
 
 ### Record Rules (`rules.xml`)
+
 - **Users**: Can only view `Approved` or `Black List` members.
 - **Managers**: Have unrestricted access to all members and workflows.
 
 ### Access Rights (`ir.model.access.csv`)
-|Model|Manager|User|
-|---|---|---|
-|`kode.member`|✅ Full|✅ R/W|
-|`kode.branch`|✅ Full|✅ Full|
-|`res.partner`|✅ Full|✅ Full|
-|`kode.blacklist.history`|✅ Full|⛔ None|
-|`kode.blacklist.revision.request`|✅ Full|⛔ None|
-|`kode.blacklist.wizard`|✅ Full|✅ Full|
-|`kode.revision.request.wizard`|✅ Full|✅ Full|
+
+| Model                             | Manager | User    |
+| --------------------------------- | ------- | ------- |
+| `kode.member`                     | ✅ Full | ✅ R/W  |
+| `kode.branch`                     | ✅ Full | ✅ Full |
+| `res.partner`                     | ✅ Full | ✅ Full |
+| `kode.blacklist.history`          | ✅ Full | ⛔ None |
+| `kode.blacklist.revision.request` | ✅ Full | ⛔ None |
+| `kode.blacklist.wizard`           | ✅ Full | ✅ Full |
+| `kode.revision.request.wizard`    | ✅ Full | ✅ Full |
 
 ---
 
 ## 🧠 Business Logic Highlights
+
 - **Unique Identifiers**: Auto-generated codes for members, branches, blacklist entries, and revision requests using Odoo sequences.
 - **Revision Control**: Only managers can update revision request statuses (`revision_status`).
 - **Status Reset**: `Accepted` revision requests automatically reset member status to `Draft`.
@@ -162,6 +164,7 @@ kode_membership/
 ---
 
 ## 📤 Excel Report (`xlsx_member_report.py`)
+
 - **Endpoint**: `/member/excel/report/<member_ids>`
 - **Output**: Generates a formatted Excel file with:
   - English Full Name
@@ -177,6 +180,7 @@ kode_membership/
   - Frozen panes for easy navigation.
 
 ### Sample Headers:
+
 ```
 English Full Name | Arabic Full Name | First Name | Last Name | Status | Last Renewal Date | Total Last Renewal Order
 ```
@@ -184,6 +188,7 @@ English Full Name | Arabic Full Name | First Name | Last Name | Status | Last Re
 ---
 
 ## 📸 PDF Report (`member_report.xml`)
+
 - **Output**: Printable PDF report containing:
   - Member details (English/Arabic names, status, renewal info).
   - Assigned branches with names and locations.
@@ -192,6 +197,7 @@ English Full Name | Arabic Full Name | First Name | Last Name | Status | Last Re
 ---
 
 ## 🚀 Future Enhancements
+
 - 🔔 **Email Notifications**: Add automated emails for blacklist and revision updates.
 - ⏳ **Blacklist Duration**: Implement duration tracking with automatic expiry.
 - 🔎 **Advanced Filters**: Enhance reports with filters for branch, status, or renewal date.
@@ -201,6 +207,7 @@ English Full Name | Arabic Full Name | First Name | Last Name | Status | Last Re
 ---
 
 ## 🧹 Dependencies
+
 - **Odoo Version**: 16 or later
 - **Odoo Modules**: `base`, `mail`, `sale`
 - **Odoo Features**: `mail.thread`, `ir.model.access`, `ir.rule`, QWeb, Excel reporting
@@ -208,7 +215,8 @@ English Full Name | Arabic Full Name | First Name | Last Name | Status | Last Re
 ---
 
 ## 👤 Author
-**Abdelrahman Naser**
+
+**Abdelrahman Naser Muhammed**
 Front-End & Python Odoo Developer | Cairo, Egypt
 📍 [LinkedIn](https://www.linkedin.com/in/abdelrahman-naser-muhammed)
 📂 [GitHub](https://github.com/abdonaser)
