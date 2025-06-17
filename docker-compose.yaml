@@ -1,0 +1,27 @@
+services:
+  odoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-data:/var/lib/odoo
+      - ./custom_addons:/mnt/extra-addons
+    environment:
+      - HOST=db
+      - USER=abdouser
+      - PASSWORD=123
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=abdouser
+      - POSTGRES_PASSWORD=123
+    volumes:
+      - db-data:/var/lib/postgresql/data
+volumes:
+  odoo-data:
+  db-data:
