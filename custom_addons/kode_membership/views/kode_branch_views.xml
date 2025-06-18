@@ -2,26 +2,22 @@
 <odoo>
 
     <!-- ========== Form View ========== -->
-     <record id="kode_branch_form_view" model="ir.ui.view">
-         <field name="name">kode.branch.form</field>
-         <field name="model">kode.branch</field>
-         <field name="arch" type="xml">
-             <form string="Branch">
-                 <sheet>
-                     <group>
-                        <field name="code" readonly="1" class="form-control-plaintext fs-3 text-success"  />
-                         <field name="name" class="form-control fs-3 fw-bolder text-dark"/>
-                         <field name="location"/>
-                         <field name="count_of_members" class="fs-3 text-danger fw-bold"/>
-                     </group>
-                     <notebook>
+    <record id="kode_branch_form_view" model="ir.ui.view">
+        <field name="name">kode.branch.form</field>
+        <field name="model">kode.branch</field>
+        <field name="arch" type="xml">
+            <form string="Branch">
+                <sheet>
+                    <group>
+                        <field name="code" readonly="1" class="form-control-plaintext fs-3 text-success" />
+                        <field name="name" class="form-control fs-3 fw-bolder text-dark"/>
+                        <field name="location"/>
+                        <field name="count_of_members" class="fs-3 text-danger fw-bold"/>
+                    </group>
+                    <notebook>
                         <page string="Members">
                             <field name="member_ids">
-                                <tree
-                                    open="1"
-                                    decoration-danger="status == 'black_list'"
-                                    decoration-success="status == 'approved'"
-                                    decoration-muted="status == 'draft'">
+                                <tree open="1" decoration-danger="status == 'black_list'" decoration-success="status == 'approved'" decoration-muted="status == 'draft'">
 
                                     <field name="image_1920" widget="image" class="doctor-avatar" options="{'preview_image': 'image_1920', 'size': [50, 50]}" />
                                     <field name="name"/>
@@ -35,27 +31,27 @@
 
                 </sheet>
                 <div class="oe_chatter">
-                        <field name="message_follower_ids" groups="base.group_no_one"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
+                    <field name="message_follower_ids" groups="base.group_no_one"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
                 </div>
-             </form>
-         </field>
-     </record>
+            </form>
+        </field>
+    </record>
 
     <!-- ========== Tree View ========== -->
     <record id="kode_branch_tree_view" model="ir.ui.view">
-         <field name="name">kode.branch.tree</field>
-         <field name="model">kode.branch</field>
-         <field name="arch" type="xml">
-             <tree string="Branches">
+        <field name="name">kode.branch.tree</field>
+        <field name="model">kode.branch</field>
+        <field name="arch" type="xml">
+            <tree string="Branches">
                 <field name="code" readonly="1"/>
                 <field name="name"/>
                 <field name="location"/>
                 <field name="count_of_members" class="fs-3 text-danger fw-bold"/>
-             </tree>
-         </field>
-     </record>
+            </tree>
+        </field>
+    </record>
 
 
     <record id="kode_branch_kanban_view" model="ir.ui.view">
@@ -98,7 +94,8 @@
                                         <div class="mt-2">
                                             <span class="badge text-bg-primary p-2 fs-4">
                                                 <i class="fa fa-users me-1"></i>
-                                                <t t-esc="record.count_of_members.value"/> Members
+                                                <t t-esc="record.count_of_members.value"/>
+ Members
                                             </span>
                                         </div>
                                     </div>
@@ -133,21 +130,18 @@
         </field>
     </record>
 
-     <!-- ========== Action ========== -->
-     <record id="kode_branch_action" model="ir.actions.act_window">
-         <field name="name">Branches</field>
-         <field name="res_model">kode.branch</field>
+    <!-- ========== Action ========== -->
+    <record id="kode_branch_action" model="ir.actions.act_window">
+        <field name="name">Branches</field>
+        <field name="res_model">kode.branch</field>
         <field name="view_mode">kanban,tree,form</field>
-         <field name="search_view_id" ref="kode_branch_search_view"/>
-         <field name="help" type="html">
-            <p class="o_view_nocontent_smile">
+        <field name="search_view_id" ref="kode_branch_search_view"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
                 Create your first Branch now!
             </p>
         </field>
-     </record>
+    </record>
 
-     <menuitem id="kode_branch_menu" name="All Branches" action="kode_branch_action" parent="branches_submenu_root"/>
+    <menuitem id="kode_branch_menu" name="All Branches" action="kode_branch_action" parent="branches_submenu_root"/>
 </odoo>
-
-
-

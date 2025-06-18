@@ -7,45 +7,16 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="set_to_draft"
-                            string="Set to Draft"
-                            type="object"
-                            icon="fa-undo"
-                            class="oe_highlight"
-                            help="Reset the membership status back to Draft."
-                            invisible="status == 'draft' or status == 'black_list' "
-                            groups="kode_membership.group_membership_manager"/>
+                    <button name="set_to_draft" string="Set to Draft" type="object" icon="fa-undo" class="oe_highlight" help="Reset the membership status back to Draft." invisible="status == 'draft' or status == 'black_list' " groups="kode_membership.group_membership_manager"/>
 
-                    <button name="set_to_approved"
-                            string="Approve"
-                            type="object"
-                            icon="fa-check"
-                            class="btn-success"
-                            help="Approve this member."
-                            invisible="status != 'draft' or status == 'black_list' "/>
+                    <button name="set_to_approved" string="Approve" type="object" icon="fa-check" class="btn-success" help="Approve this member." invisible="status != 'draft' or status == 'black_list' "/>
 
-                    <button
-                        name="action_open_blacklist_wizard"
-                        string="Set To Blacklist"
-                        type="object"
-                        class="btn-danger"
-                        invisible="status == 'black_list' "
-                    />
+                    <button name="action_open_blacklist_wizard" string="Set To Blacklist" type="object" class="btn-danger" invisible="status == 'black_list' " />
 
-                    <button
-                        name="action_open_revision_request_wizard"
-                        string="Revision Request"
-                        type="object"
-                        class="btn-secondary"
-                        invisible="status != 'black_list' "
-                    />
+                    <button name="action_open_revision_request_wizard" string="Revision Request" type="object" class="btn-secondary" invisible="status != 'black_list' " />
 
 
-                    <field name="status"
-                           widget="statusbar"
-                           options="{'clickable': '0'}"
-                           readonly="1"
-                           nolabel="1"/>
+                    <field name="status" widget="statusbar" options="{'clickable': '0'}" readonly="1" nolabel="1"/>
                 </header>
                 <sheet>
 
@@ -61,15 +32,7 @@
 
                                 <span invisible="latest_revision_status == False" class="d-block mt-2 d-flex justify-content-center align-items-center gap-2">
                                     <span class="fw-semibold">📌 Latest revision status:</span>
-                                    <field
-                                        name="latest_revision_status"
-                                        widget="badge"
-                                        decoration-success="latest_revision_status == 'accepted'"
-                                        decoration-info="latest_revision_status == 'pending'"
-                                        decoration-danger="latest_revision_status == 'denied'"
-                                        style="font-size:2px;font-weight: bold;"
-                                        readonly="1"
-                                    />
+                                    <field name="latest_revision_status" widget="badge" decoration-success="latest_revision_status == 'accepted'" decoration-info="latest_revision_status == 'pending'" decoration-danger="latest_revision_status == 'denied'" style="font-size:2px;font-weight: bold;" readonly="1" />
                                 </span>
                             </h3>
 
@@ -78,20 +41,15 @@
 
 
                     <div name="button_box" class="oe_button_box">
-                            <button
-                                name="open_invoice"
-                                type="object"
-                                class="oe_stat_button oe_highlight"
-                                icon="fa-pencil-square-o"
-                            >
-                                <div class="o_form_field o_stat_info">
-                                    <span class="o_stat_value">
-                                        <field name="currency_id" invisible="1" field_id="currency_id_0"/>
-                                        <field name="total_last_renewal_data" widget="monetary" options="{'currency_field': 'currency_id'}" field_id="total_invoiced_0" readonly='1'/>
-                                        <!-- <field name="total_last_renewal_data" widget="monetary" /> -->
-                                    </span>
-                                    <span class="o_stat_text">Last Renewal Order</span>
-                                </div>
+                        <button name="open_invoice" type="object" class="oe_stat_button oe_highlight" icon="fa-pencil-square-o">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="currency_id" invisible="1" field_id="currency_id_0"/>
+                                    <field name="total_last_renewal_data" widget="monetary" options="{'currency_field': 'currency_id'}" field_id="total_invoiced_0" readonly='1'/>
+                                    <!-- <field name="total_last_renewal_data" widget="monetary" /> -->
+                                </span>
+                                <span class="o_stat_text">Last Renewal Order</span>
+                            </div>
                         </button>
                     </div>
 
@@ -99,7 +57,7 @@
                         <div class="oe_title">
                             <h1>
                                 <label for='code'>Member Code: </label>
-                                <field name="code"  readonly="1" class="text-capitalize"  string="Member Code: "/>
+                                <field name="code" readonly="1" class="text-capitalize" string="Member Code: "/>
                             </h1>
                             <h1 class="mt-2">
                                 <field name="name" readonly="1" class="text-capitalize"/>
@@ -107,23 +65,19 @@
 
                         </div>
                         <div class="o_form_image_centered ">
-                            <field name="image_1920"
-                                   widget="image"
-                                   class="oe_avatar img-thumbnail"
-                                   options="{'size': [250, 250]}"
-                                   nolabel="1"/>
+                            <field name="image_1920" widget="image" class="oe_avatar img-thumbnail" options="{'size': [250, 250]}" nolabel="1"/>
                         </div>
                     </div>
 
                     <group string="General Info">
 
-                        <field name="partner_id"  class="form-control fs-3 text-dark" readonly="status == 'black_list' or status == 'approved' "/>
+                        <field name="partner_id" class="form-control fs-3 text-dark" readonly="status == 'black_list' or status == 'approved' "/>
                         <field name="arabic_name" readonly="1"/>
                         <field name="first_name" readonly="1"/>
                         <field name="last_name" readonly="1"/>
                     </group>
 
-                    <group  string="Membership" class="my-2 border-top pt-2 border-black border-4">
+                    <group string="Membership" class="my-2 border-top pt-2 border-black border-4">
                         <field name="last_renewal_date" readonly="1" class="mb-3 fs-2 fw-bold "/>
                         <field name="branch_ids" widget="many2many_tags" readonly="status == 'black_list'" />
                     </group>
@@ -143,21 +97,12 @@
         <field name="name">kode.member.tree</field>
         <field name="model">kode.member</field>
         <field name="arch" type="xml">
-            <tree string="Members" decoration-success="status == 'approved'"
-                                      decoration-danger="status == 'black_list'"
-                                      decoration-muted="status == 'draft'">
+            <tree string="Members" decoration-success="status == 'approved'" decoration-danger="status == 'black_list'" decoration-muted="status == 'draft'">
                 <header>
-                    <button
-                        name="member_xlsx_report"
-                        type="object"
-                        string="Print Excel Report"
-                        class="btn btn-primary"/>
+                    <button name="member_xlsx_report" type="object" string="Print Excel Report" class="btn btn-primary"/>
                 </header>
-                <field name="image_1920"
-                       widget="image"
-                       class="oe_avatar"
-                       options="{'preview_image': 'image_1920', 'size': [44, 44]}"/>
-                <field name="code"  readonly="1" />
+                <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image': 'image_1920', 'size': [44, 44]}"/>
+                <field name="code" readonly="1" />
                 <field name="partner_id"/>
                 <field name="arabic_name"/>
                 <field name="first_name"/>
@@ -217,14 +162,14 @@
 
                                     <div class="oe_kanban_bottom_left">
                                         <div class="mt-2">
-                                        <field name="status" widget="badge" decoration-success="status == 'approved'" decoration-info="status == 'draft'" decoration-danger="status == 'black_list'"/>
+                                            <field name="status" widget="badge" decoration-success="status == 'approved'" decoration-info="status == 'draft'" decoration-danger="status == 'black_list'"/>
                                         </div>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
                                         <div t-if="record.last_renewal_date.raw_value">
                                             <small>
                                                 Last Renewal:
-                                                <!-- <span t-esc="record.last_renewal_date.value"/> -->
+                                                                                                <!-- <span t-esc="record.last_renewal_date.value"/> -->
                                                 <field name="last_renewal_date"/>
                                             </small>
                                         </div>
@@ -266,7 +211,7 @@
     </record>
 
 
-     <!-- ========== Action ========== -->
+    <!-- ========== Action ========== -->
     <record id="kode_member_action" model="ir.actions.act_window">
         <field name="name">Members</field>
         <field name="type">ir.actions.act_window</field>
@@ -274,15 +219,12 @@
         <field name="view_mode">kanban,tree,form</field>
         <field name="search_view_id" ref="kode_member_search_view"/>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smile">
+            <p class="o_view_nocontent_smiling_face">
                 Create your first member now!
             </p>
         </field>
     </record>
 
     <!-- ========== Menu ========== -->
-    <menuitem id="kode_member_menu"
-              name="All Members"
-              parent="members_submenu_root"
-              action="kode_member_action"/>
+    <menuitem id="kode_member_menu" name="All Members" parent="members_submenu_root" action="kode_member_action"/>
 </odoo>
