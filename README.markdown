@@ -22,7 +22,7 @@ Follow these steps to set up the module using Docker:
 1. **Clone the Repository**:
 
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/abdonaser/KODE-Sports-Club-Membership.git
    cd KODE-Sports-Club-Membership
    ```
 
