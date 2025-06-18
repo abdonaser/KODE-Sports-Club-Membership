@@ -107,8 +107,8 @@ kode_membership/
 │   ├── blacklist_wizard_view.xml
 │   ├── revision_request_wizard_view.xml
 ├── reports/               # Reporting logic
-│   ├── xlsx_member_report.py
-│   ├── member_report.xml
+│   ├── xlsx_member_report.py # Excel report
+│   ├── member_report.xml  # PDF report
 ├── security/              # Access control
 │   ├── groups.xml
 │   ├── rules.xml
