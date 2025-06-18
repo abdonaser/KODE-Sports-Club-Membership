@@ -23,7 +23,7 @@ Follow these steps to set up the module using Docker:
 
    ```bash
    git clone <your-repo-url>
-   cd odoo-docker-project
+   cd KODE-Sports-Club-Membership
    ```
 
 2. **Ensure Module Placement**:
